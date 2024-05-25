@@ -54,7 +54,7 @@
                             <td>{{ $postCategory->description }}</td>
                             <td>{{ $postCategory->slug }}</td>
                             <td>
-                                <img src="{{asset($postCategory->image)}}" alt="">
+                                <img src="{{asset($postCategory->image['indexArray'][$postCategory->image['currentImage']])}}" alt="" width="100  " height="100">
                             </td>
                             <td>{{ $postCategory->tags }}</td>
                             <td>
@@ -70,7 +70,7 @@
                                 <form class="d-inline" action="{{ route('admin.content.category.destroy', $postCategory->id)}}" method="post">
                                     @csrf
                                     {{ method_field('delete')}}
-                                    <button class="btn btn-danger btn-sm" type="submit"><i class="fa fa-trash-alt"></i> حذف</button>
+                                    <button class="btn btn-danger btn-sm delete" type="submit"><i class="fa fa-trash-alt"></i> حذف</button>
                                 </form> 
                             </td>
                         </tr>
@@ -154,5 +154,7 @@
         }
     </script>
 
+
+@include('admin.alerts.sweetalert.delete-confirm', ['className' => 'delete'])
 
 @endsection
