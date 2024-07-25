@@ -176,21 +176,24 @@ Route::prefix('admin')->namespace('Admin')->group(function(){
         //comment
         Route::prefix('comment')->group(function(){
             Route::get('/', [ContentCommentController::class, 'index'])->name('admin.content.comment.index');
-            Route::get('/show', [ContentCommentController::class, 'show'])->name('admin.content.comment.show');
-            Route::post('/store', [ContentCommentController::class, 'store'])->name('admin.content.comment.store');
-            Route::get('/edit/{id}', [ContentCommentController::class, 'edit'])->name('admin.content.comment.edit');
-            Route::put('/update/{id}', [ContentCommentController::class, 'update'])->name('admin.content.comment.update');
-            Route::delete('/destroy/{id}', [ContentCommentController::class, 'destroy'])->name('admin.content.comment.destroy');
+            Route::get('/show/{comment}', [ContentCommentController::class, 'show'])->name('admin.content.comment.show');
+            Route::delete('/destroy/{comment}', [ContentCommentController::class, 'destroy'])->name('admin.content.comment.destroy');
+            Route::get('/approved/{comment}', [ContentCommentController::class, 'approved'])->name('admin.content.comment.approved');
+            Route::get('/status/{comment}', [ContentCommentController::class, 'status'])->name('admin.content.comment.status');
+            Route::post('/answer/{comment}', [ContentCommentController::class, 'answer'])->name('admin.content.comment.answer');
+
         });
 
         //faq
         Route::prefix('faq')->group(function(){
             Route::get('/', [FAQController::class, 'index'])->name('admin.content.faq.index');
-            Route::get('/create', [FAQController::class, 'create'])->name('admin.content.faq.show');
+            Route::get('/create', [FAQController::class, 'create'])->name('admin.content.faq.create');
             Route::post('/store', [FAQController::class, 'store'])->name('admin.content.faq.store');
-            Route::get('/edit/{id}', [FAQController::class, 'edit'])->name('admin.content.faq.edit');
-            Route::put('/update/{id}', [FAQController::class, 'update'])->name('admin.content.faq.update');
-            Route::delete('/destroy/{id}', [FAQController::class, 'destroy'])->name('admin.content.faq.destroy');
+            Route::get('/edit/{faq}', [FAQController::class, 'edit'])->name('admin.content.faq.edit');
+            Route::put('/update/{faq}', [FAQController::class, 'update'])->name('admin.content.faq.update');
+            Route::delete('/destroy/{faq}', [FAQController::class, 'destroy'])->name('admin.content.faq.destroy');
+            Route::get('/status/{faq}', [FAQController::class, 'status'])->name('admin.content.faq.status');
+
         });
 
         //menu
@@ -198,9 +201,11 @@ Route::prefix('admin')->namespace('Admin')->group(function(){
             Route::get('/', [MenuController::class, 'index'])->name('admin.content.menu.index');
             Route::get('/create', [MenuController::class, 'create'])->name('admin.content.menu.create');
             Route::post('/store', [MenuController::class, 'store'])->name('admin.content.menu.store');
-            Route::get('/edit/{id}', [MenuController::class, 'edit'])->name('admin.content.menu.edit');
-            Route::put('/update/{id}', [MenuController::class, 'update'])->name('admin.content.menu.update');
-            Route::delete('/destroy/{id}', [MenuController::class, 'destroy'])->name('admin.content.menu.destroy');
+            Route::get('/edit/{menu}', [MenuController::class, 'edit'])->name('admin.content.menu.edit');
+            Route::put('/update/{menu}', [MenuController::class, 'update'])->name('admin.content.menu.update');
+            Route::delete('/destroy/{menu}', [MenuController::class, 'destroy'])->name('admin.content.menu.destroy');
+            Route::get('/status/{menu}', [MenuController::class, 'status'])->name('admin.content.menu.status');
+
         });
 
         //page
@@ -208,9 +213,10 @@ Route::prefix('admin')->namespace('Admin')->group(function(){
             Route::get('/', [PageController::class, 'index'])->name('admin.content.page.index');
             Route::get('/create', [PageController::class, 'create'])->name('admin.content.page.create');
             Route::post('/store', [PageController::class, 'store'])->name('admin.content.page.store');
-            Route::get('/edit/{id}', [PageController::class, 'edit'])->name('admin.content.page.edit');
-            Route::put('/update/{id}', [PageController::class, 'update'])->name('admin.content.page.update');
-            Route::delete('/destroy/{id}', [PageController::class, 'destroy'])->name('admin.content.page.destroy');
+            Route::get('/edit/{page}', [PageController::class, 'edit'])->name('admin.content.page.edit');
+            Route::put('/update/{page}', [PageController::class, 'update'])->name('admin.content.page.update');
+            Route::delete('/destroy/{page}', [PageController::class, 'destroy'])->name('admin.content.page.destroy');
+
         });
 
         //post
@@ -218,9 +224,12 @@ Route::prefix('admin')->namespace('Admin')->group(function(){
             Route::get('/', [PostController::class, 'index'])->name('admin.content.post.index');
             Route::get('/create', [PostController::class, 'create'])->name('admin.content.post.create');
             Route::post('/store', [PostController::class, 'store'])->name('admin.content.post.store');
-            Route::get('/edit/{id}', [PostController::class, 'edit'])->name('admin.content.post.edit');
-            Route::put('/update/{id}', [PostController::class, 'update'])->name('admin.content.post.update');
-            Route::delete('/destroy/{id}', [PostController::class, 'destroy'])->name('admin.content.post.destroy');
+            Route::get('/edit/{post}', [PostController::class, 'edit'])->name('admin.content.post.edit');
+            Route::put('/update/{post}', [PostController::class, 'update'])->name('admin.content.post.update');
+            Route::delete('/destroy/{post}', [PostController::class, 'destroy'])->name('admin.content.post.destroy');
+            Route::get('/status/{post}', [PostController::class, 'status'])->name('admin.content.post.status');
+            Route::get('/commentable/{post}', [PostController::class, 'commentable'])->name('admin.content.post.commentable');
+
     });
 
 
