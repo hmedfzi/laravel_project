@@ -2,25 +2,34 @@
 
 namespace App\Http\Controllers\admin\ticket;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Ticket\Ticket;
+use App\Http\Controllers\Controller;
 
 class TicketController extends Controller
 {
 
     public function newTickets()
     {
-        return view('admin.ticket.index');
+        $tickets = Ticket::where('seen', 0)->get();
+        foreach($tickets as $newTicket){
+            $newTicket->update(['seen' => 1]);
+            $newTicket->seen = 1 ;
+            $result = $newTicket->save();           
+        }
+        return view('admin.ticket.index', compact('tickets'));
     }
 
     public function openTickets()
     {
-        return view('admin.ticket.index');
+        $tickets = Ticket::where('status', 0)->get();
+        return view('admin.ticket.index', compact('tickets'));
     }
 
     public function closeTickets()
     {
-        return view('admin.ticket.index');
+        $tickets = Ticket::where('status', 1)->get();
+        return view('admin.ticket.index', compact('tickets'));
     }
     /**
      * Display a listing of the resource.
@@ -29,72 +38,32 @@ class TicketController extends Controller
      */
     public function index()
     {
-        return view('admin.ticket.index');
+        $tickets = Ticket::all();
+        return view('admin.ticket.index', compact('tickets'));
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function change(Ticket $ticket){
+        $ticket->status = $ticket->status == 0 ? 1 : 0;
+        $result = $ticket->save();
+        return redirect()->route('admin.ticket.index')->with('swal-success', 'وضعیت با موفقیت تغییر کرد');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function show(Ticket $ticket){
+        return view('admin.ticket.show', compact('ticket'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show()
-    {
-        return view('admin.ticket.show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function answer(Request $request, Ticket $ticket){
+        $inputs = $request->all();
+        $inputs['subject'] = $ticket->subject;
+        $inputs['status'] = 0;
+        $inputs['seen'] = 1;
+        $inputs['reference_id'] = $ticket->admin->id;
+        $inputs['user_id'] = 1;
+        $inputs['category_id'] = $ticket->category_id;
+        $inputs['priority_id'] =$ticket->priority->id;
+        $inputs['ticket_id'] =$ticket->id;
+        $answer = Ticket::create($inputs);
+        return redirect()->route('admin.ticket.index')->with('swal-success','پاسخ شما با موفقیت ثبت شد.');
     }
 }

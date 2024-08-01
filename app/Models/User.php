@@ -2,13 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Models\Ticket\Ticket;
+use Laravel\Sanctum\HasApiTokens;
+use App\Models\Ticket\TicketAdmin;
+use Laravel\Jetstream\HasProfilePhoto;
+use Illuminate\Notifications\Notifiable;
+use League\CommonMark\Reference\Reference;
+use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Jetstream\HasProfilePhoto;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -21,16 +24,22 @@ class User extends Authenticatable
     /**
      * The attributes that are mass assignable.
      *
-     * @var string[]
+     * @var array
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
+        'mobile',
+        'status',
+        'user_type',
+        'activation',
+        'profile_photo_path',
         'password',
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * The attributes that should be hidden for arrays.
      *
      * @var array
      */
@@ -42,7 +51,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be cast.
+     * The attributes that should be cast to native types.
      *
      * @var array
      */
@@ -59,7 +68,16 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function getFullNameAttribute(){
-        return "{$this->first_name} {$this->last_name}";
+    public function getFullNameAttribute()
+    {
+    return "{$this->first_name} {$this->last_name}";
+    }
+
+    public function ticketAdmin(){
+        return $this->hasOne(TicketAdmin::class);
+    }
+
+    public function tickets(){
+        return $this->hasMany(Ticket::class);
     }
 }
