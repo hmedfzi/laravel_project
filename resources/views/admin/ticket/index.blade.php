@@ -46,22 +46,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($tickets as $key => $ticket)
+
+                        @foreach ($tickets as $ticket)
+
                         <tr>
-                            <th>{{ $key += 1 }}</th>
-                            <td>{{ $ticket->user->fullName }}</td>
+                            <th>{{ $loop->iteration }}</th>
+                            <td>{{ $ticket->user->first_name . ' ' . $ticket->user->last_name }}</td>
                             <td>{{ $ticket->subject }}</td>
                             <td>{{ $ticket->category->name }}</td>
                             <td>{{ $ticket->priority->name }}</td>
-                            <td>{{ $ticket->admin->user->fullName }}</td>
-                            <td>{{ $ticket->parent->subject ?? '-'}}</td>
+                            <td>{{ $ticket->admin->user->first_name . ' ' . $ticket->admin->user->last_name }}</td>
+                            <td>{{ $ticket->parent->subject ?? '-' }}</td>
                             <td class="width-16-rem text-left">
                                 <a href="{{ route('admin.ticket.show', $ticket->id) }}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> مشاهده</a>
-                                <a href="{{ route('admin.ticket.change', $ticket->id) }}" class="btn btn-{{$ticket->status == 0 ? 'danger' : 'success'}} btn-sm"><i class="fa fa-check"></i> {{ $ticket->status == 1 ? 'باز کردن' : 'بستن' }}</a>
+                                <a href="{{ route('admin.ticket.change', $ticket->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-check"></i> {{ $ticket->status == 1 ? 'باز کردن' : 'بستن' }}</a>
                             </td>
-                            
                         </tr>
+
                         @endforeach
+
+
                     </tbody>
                 </table>
             </section>

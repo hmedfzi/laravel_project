@@ -50,7 +50,7 @@
                             <th>{{ $key + 1 }}</th>
                             <td>{{ $email->subject }}</td>
                             <td>{{ $email->body }}</td>
-                            <td>{{ $email->published_at }}</td>
+                            <td>{{ jalaliDate($email->published_at, 'H:i:s Y-m-d') }}</td>
                             <td>
                                 <label>
                                     <input id="{{ $email->id }}" onchange="changeStatus({{ $email->id }})" data-url="{{ route('admin.notify.email.status', $email->id) }}" type="checkbox" @if ($email->status === 1)

@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('head-tag')
-<title>ویرایش سوال</title>
+<title> سوالات متداول</title>
 @endsection
 
 @section('content')
@@ -30,71 +30,77 @@
             </section>
 
             <section>
-                <form action="{{route('admin.content.faq.update', $faq->id)}}" method="post" id="form">
+                <form action="{{ route('admin.content.faq.update', $faq->id) }}" method="post" id="form">
                     @csrf
-                    {{ method_field('put')}}
+                    {{ method_field('put') }}
                     <section class="row">
-                        <section class="col-12 my-2">
+
+                        <section class="col-12">
                             <div class="form-group">
                                 <label for="">پرسش</label>
-                                <input type="text" name="question" class="form-control form-control-sm" value="{{old('question', $faq->question)}}">
+                                <input type="text" class="form-control form-control-sm" name="question" id="name" value="{{ old('question', $faq->question) }}">
+
                             </div>
                             @error('question')
-                            <span class="alert-require bg-danger text-white p-1 rounded" role="alert">
-                                <strong>
-                                    {{ $message }}
-                                </strong>
-                            </span>
-                            @enderror
-                        </section>
-
-                        <section class="col-12 my-2">
-                            <div class="form-group">
-                                <label for="">پاسخ</label>
-                                <textarea name="answer" id="answer"  class="form-control form-control-sm" rows="6">
-                                    {{old('answer', $faq->answer)}}
-                                </textarea>
-                            </div>
-                            @error('answer')
-                            <span class="alert-require bg-danger text-white p-1 rounded" role="alert">
-                                <strong>
-                                    {{ $message }}
-                                </strong>
-                            </span>
-                            @enderror
-                        </section>
-                        <section class="col-12 col-md-6 my-2">
-                            <div class="form-group">
-                                <label for="tags">تگ ها</label>
-                                <input type="hidden" class="form-control form-control-sm"  name="tags" id="tags" value="{{ old('tags', $faq->tags) }}">
-                                <select class="select2 form-control form-control-sm" id="select_tags" multiple>
-
-                                </select>
-                            </div>
-                            @error('tags')
-                            <span class="alert-require bg-danger text-white p-1 rounded" role="alert">
-                                <strong>
-                                    {{ $message }}
-                                </strong>
-                            </span>
-                            @enderror
-                        </section>
-                        <section class="col-12 col-md-6 my-2">
-                            <div class="form-group">
-                                <label for="status">وضعیت</label>
-                                <select name="status" id="" class="form-control form-control-sm" id="status">
-                                    <option value="0" @if(old('status', $faq->status) == 0) selected @endif>غیرفعال</option>
-                                    <option value="1" @if(old('status', $faq->status) == 1) selected @endif>فعال</option>
-                                </select>
-                            </div>
-                            @error('status')
-                            <span class="alert-require bg-danger text-white p-1 rounded" role="alert">
+                            <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
                                 <strong>
                                     {{ $message }}
                                 </strong>
                             </span>
                         @enderror
-                        </section> 
+                        </section>
+
+                        <section class="col-12">
+                            <div class="form-group">
+                                <label for="">پاسخ</label>
+                                <textarea name="answer" id="answer"  class="form-control form-control-sm" rows="6">{{ old('answer', $faq->answer) }}</textarea>
+                            </div>
+                            @error('answer')
+                            <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
+                                <strong>
+                                    {{ $message }}
+                                </strong>
+                            </span>
+                        @enderror
+                        </section>
+
+                        <section class="col-12 col-md-6 my-2">
+                            <div class="form-group">
+                                <label for="tags">تگ ها</label>
+                                <input type="hidden" class="form-control form-control-sm" name="tags" id="tags"
+                                    value="{{ old('tags', $faq->tags) }}">
+                                <select class="select2 form-control form-control-sm" id="select_tags" multiple>
+
+                                </select>
+                            </div>
+                            @error('tags')
+                                <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
+                                    <strong>
+                                        {{ $message }}
+                                    </strong>
+                                </span>
+                            @enderror
+                        </section>
+
+                        <section class="col-12 col-md-6 my-2">
+                            <div class="form-group">
+                                <label for="status">وضعیت</label>
+                                <select name="status" id="" class="form-control form-control-sm" id="status">
+                                    <option value="0" @if (old('status', $faq->status) == 0) selected @endif>غیرفعال</option>
+                                    <option value="1" @if (old('status', $faq->status) == 1) selected @endif>فعال</option>
+                                </select>
+                            </div>
+                            @error('status')
+                                <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
+                                    <strong>
+                                        {{ $message }}
+                                    </strong>
+                                </span>
+                            @enderror
+                        </section>
+
+
+
                         <section class="col-12">
                             <button class="btn btn-primary btn-sm">ثبت</button>
                         </section>
@@ -113,6 +119,8 @@
     <script>
         CKEDITOR.replace('answer');
     </script>
+
+
 <script>
     $(document).ready(function () {
         var tags_input = $('#tags');

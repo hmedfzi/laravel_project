@@ -35,7 +35,7 @@
                     @csrf
                     <section class="row">
 
-                        <section class="col-12 col-md-6 my-2">
+                        <section class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="">عنوان پست</label>
                                 <input type="text" class="form-control form-control-sm" name="title" value="{{ old('title') }}">
@@ -49,7 +49,7 @@
                         @enderror
                         </section>
 
-                        <section class="col-12 col-md-6 my-2">
+                        <section class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="">انتخاب دسته</label>
                                 <select name="category_id" id="" class="form-control form-control-sm">
@@ -69,7 +69,7 @@
                         @enderror
                         </section>
 
-                        <section class="col-12 col-md-6 my-2">
+                        <section class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="">تصویر </label>
                                 <input type="file" name="image" class="form-control form-control-sm">
@@ -83,7 +83,7 @@
                         @enderror
                         </section>
 
-                        <section class="col-12 col-md-6 my-2">
+                        <section class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="status">وضعیت</label>
                                 <select name="status" id="" class="form-control form-control-sm" id="status">
@@ -101,7 +101,7 @@
                         </section>
 
 
-                        <section class="col-12 col-md-6 my-2">
+                        <section class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="commentable">امکان درج کامنت</label>
                                 <select name="commentable" id="" class="form-control form-control-sm" id="commentable">
@@ -120,7 +120,7 @@
 
 
 
-                        <section class="col-12 col-md-6 my-2">
+                        <section class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="">تاریخ انتشار</label>
                                 <input type="text" name="published_at" id="published_at" class="form-control form-control-sm d-none">
@@ -135,7 +135,7 @@
                         @enderror
                         </section>
 
-                        <section class="col-12 my-2">
+                        <section class="col-12">
                             <div class="form-group">
                                 <label for="tags">تگ ها</label>
                                 <input type="hidden" class="form-control form-control-sm"  name="tags" id="tags" value="{{ old('tags') }}">
@@ -152,7 +152,7 @@
                         @enderror
                         </section>
 
-                        <section class="col-12 my-2">
+                        <section class="col-12">
                             <div class="form-group">
                                 <label for="">خلاصه پست</label>
                                 <textarea name="summary" id="summary"  class="form-control form-control-sm" rows="6">{{ old('summary') }}</textarea>
@@ -166,7 +166,7 @@
                         @enderror
                         </section>
 
-                        <section class="col-12 my-2">
+                        <section class="col-12">
                             <div class="form-group">
                                 <label for="">متن پست</label>
                                 <textarea name="body" id="body"  class="form-control form-control-sm" rows="6">{{ old('body') }}</textarea>

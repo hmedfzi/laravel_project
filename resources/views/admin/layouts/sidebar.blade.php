@@ -49,9 +49,9 @@
                 </section>
                 <section class="sidebar-dropdown">
                     <a href="{{ route('admin.market.payment.index') }}">تمام پرداخت ها</a>
-                    <a href="{{ route('admin.market.payment.index') }}">پرداخت های آنلاین</a>
-                    <a href="{{ route('admin.market.payment.index') }}">پرداخت های آفلاین</a>
-                    <a href="{{ route('admin.market.payment.index') }}">پرداخت در محل</a>
+                    <a href="{{ route('admin.market.payment.online') }}">پرداخت های آنلاین</a>
+                    <a href="{{ route('admin.market.payment.offline') }}">پرداخت های آفلاین</a>
+                    <a href="{{ route('admin.market.payment.cash') }}">پرداخت در محل</a>
                 </section>
             </section>
 
@@ -118,6 +118,7 @@
             </a>
 
 
+
             <section class="sidebar-part-title">تیکت ها</section>
             <a href="{{ route('admin.ticket.category.index') }}" class="sidebar-link">
                 <i class="fas fa-bars"></i>
@@ -126,7 +127,6 @@
               <a href="{{ route('admin.ticket.priority.index') }}" class="sidebar-link">
                 <i class="fas fa-bars"></i>
                 <span> اولویت تیکت ها </span>
-            </a>
             </a>
               <a href="{{ route('admin.ticket.admin.index') }}" class="sidebar-link">
                 <i class="fas fa-bars"></i>
@@ -144,10 +144,13 @@
                 <i class="fas fa-bars"></i>
                 <span>تیکت های بسته</span>
             </a>
+
             <a href="{{ route('admin.ticket.index') }}" class="sidebar-link">
                 <i class="fas fa-bars"></i>
-                <span>همه تیکت ها</span>
+                <span>همه ی تیکت ها</span>
             </a>
+
+
 
             <section class="sidebar-part-title">اطلاع رسانی</section>
             <a href="{{ route('admin.notify.email.index') }}" class="sidebar-link">
@@ -158,6 +161,8 @@
                 <i class="fas fa-bars"></i>
                 <span>اعلامیه پیامکی</span>
             </a>
+
+
 
             <section class="sidebar-part-title">تنظیمات</section>
             <a href="{{ route('admin.setting.index') }}" class="sidebar-link">

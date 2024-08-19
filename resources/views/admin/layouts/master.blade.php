@@ -25,6 +25,7 @@
         </section>
     </section>
 
+
     @include('admin.layouts.script')
     @yield('script')
 
@@ -33,8 +34,9 @@
         @include('admin.alerts.toast.error')
     </section>
 
-    @include('admin.alerts.sweetalert.success')
     @include('admin.alerts.sweetalert.error')
+    @include('admin.alerts.sweetalert.success')
+
 
 </body>
 </html>

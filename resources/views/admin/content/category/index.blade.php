@@ -23,6 +23,7 @@
                   دسته بندی
                 </h5>
             </section>
+
             @include('admin.alerts.alert-section.success')
 
             <section class="d-flex justify-content-between align-items-center mt-4 mb-3 border-bottom pb-2">
@@ -47,34 +48,38 @@
                         </tr>
                     </thead>
                     <tbody>
+
                         @foreach ($postCategories as $key => $postCategory)
+
                         <tr>
-                            <th>{{ $key += 1  }}</th>
+                            <th>{{ $key += 1 }}</th>
                             <td>{{ $postCategory->name }}</td>
                             <td>{{ $postCategory->description }}</td>
                             <td>{{ $postCategory->slug }}</td>
                             <td>
-                                <img src="{{asset($postCategory->image['indexArray'][$postCategory->image['currentImage']])}}" alt="" width="100  " height="100">
+                                <img src="{{ asset($postCategory->image['indexArray'][$postCategory->image['currentImage']] ) }}" alt="" width="100" height="50">
                             </td>
                             <td>{{ $postCategory->tags }}</td>
                             <td>
                                 <label>
-                                    <input id="{{ $postCategory->id}}" onchange="changeStatus({{ $postCategory->id}})" data-url = "{{ route('admin.content.category.status', $postCategory->id)}}" type="checkbox" 
-                                        @if($postCategory->status === 1)
-                                            checked 
-                                        @endif>
+                                    <input id="{{ $postCategory->id }}" onchange="changeStatus({{ $postCategory->id }})" data-url="{{ route('admin.content.category.status', $postCategory->id) }}" type="checkbox" @if ($postCategory->status === 1)
+                                    checked
+                                    @endif>
                                 </label>
                             </td>
                             <td class="width-16-rem text-left">
-                                <a href="{{ route('admin.content.category.edit', $postCategory->id)}}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> ویرایش</a>
-                                <form class="d-inline" action="{{ route('admin.content.category.destroy', $postCategory->id)}}" method="post">
+                                <a href="{{ route('admin.content.category.edit', $postCategory->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> ویرایش</a>
+                                <form class="d-inline" action="{{ route('admin.content.category.destroy', $postCategory->id) }}" method="post">
                                     @csrf
-                                    {{ method_field('delete')}}
-                                    <button class="btn btn-danger btn-sm delete" type="submit"><i class="fa fa-trash-alt"></i> حذف</button>
-                                </form> 
+                                    {{ method_field('delete') }}
+                                <button class="btn btn-danger btn-sm delete" type="submit"><i class="fa fa-trash-alt"></i> حذف</button>
+                            </form>
                             </td>
                         </tr>
+
                         @endforeach
+
+
                     </tbody>
                 </table>
             </section>
@@ -84,7 +89,6 @@
 </section>
 
 @endsection
-
 @section('script')
 
     <script type="text/javascript">
@@ -156,5 +160,6 @@
 
 
 @include('admin.alerts.sweetalert.delete-confirm', ['className' => 'delete'])
+
 
 @endsection
